@@ -19,11 +19,11 @@ class ActivityPeriodViewsets(GenericAPIView):
 
         if check_if_user_exists:
             user = authenticate(username=data['username'], password=data['password'])
-        #     data_activity={
-        #         'start_time':datetime.now(),
-        #         'userid_id':user_queryset.first().id
-        #     }
-        #     ActivityPeriod.objects.create(**data_activity)
+            data_activity={
+                'start_time':datetime.now(),
+                'userid_id':user_queryset.first().id
+            }
+            ActivityPeriod.objects.create(**data_activity)
             if user:
                 response={'status':1,'message':'Login Successful','id':user_queryset.first().id}
            
