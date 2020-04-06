@@ -4,7 +4,8 @@ import RaisedButton from 'material-ui/RaisedButton';
 import OverlayVisible from './OverlayVisible.js'
 import axios from 'axios';
 import { List } from 'antd';
-import Login from './Login'
+
+import Loginscreen from './Loginscreen'
 
 const style = {
     margin: 15,
@@ -15,17 +16,14 @@ class Records extends Component {
   constructor(props){
     super(props);
     this.state={
-        loginscreen:'',
-        loginmessage:'',
-        buttonLabel:false,
-        isLogin:'',
+        loginPage:[],
+        uploadScreen:[]
+      }
     }
-  }
   handleClick(event){
-    var apiBaseUrl = "http://127.0.0.1:8000/api/";
-    //var self = this;
-    console.log(this.props.id.appContext.state.userid)
-    console.log(this)
+    //var apiBaseUrl = "http://127.0.0.1:8000/api/";
+    var apiBaseUrl = "https://django-react-activityapp.herokuapp.com/api/";
+    var self = this;
     var payload={
             "userid":this.props.id.appContext.state.userid,
             }
@@ -34,23 +32,25 @@ class Records extends Component {
      console.log(response);
      
      if(response.data.status === 1){
-       console.log('Logout successful')
-       var loginscreen=[];
-         var loginmessage="Not Registered yet.Go to registration";
-         loginscreen.push(<Login parentContext={this}/>)
-         this.setState({
-            loginscreen:loginscreen,
-            loginmessage:loginmessage,
-            buttonLabel:"Login",
-            isLogin:false
-        })
+         console.log('Logout Successful')
+       alert("Logout successful");
+        var loginPage=[]
+        console.log(self)
+        console.log(self.props.id.appContext)
+        console.log(self.props.id.appContext.loginPage)
+        loginPage.push(<Loginscreen parentContext={self.props.id.appContext}/>)
+        self.props.id.appContext.setState({
+            loginPage:loginPage,
+            uploadScreen:[]
+              })
+      console.log('after change of state')
+      console.log(self)  
      }
    })
    .catch(function (error) {
      console.log(error);
    });
   }
-  
   render() {
     return (
       <div>
@@ -86,9 +86,6 @@ class Records extends Component {
 
         </div>
         );
-  }
+    }
 }
-
-
-
 export default Records;

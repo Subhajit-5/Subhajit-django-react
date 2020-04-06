@@ -11,28 +11,34 @@ const style = {
     margin:45,
    };
 class Login extends React.Component {
-
-
-
+   constructor(props){
+    super(props);
+    this.state={
+      username:'',
+      password:'',
+    }
+  }
+  
   handleClick(event){
-    var apiBaseUrl = "http://127.0.0.1:8000/api/";
     var self = this;
+    //var apiBaseUrl = "http://127.0.0.1:8000/api/";
+    var apiBaseUrl = "https://django-react-activityapp.herokuapp.com/api/";
     var payload={
       "username":this.state.username,
 	    "password":this.state.password,
     }
     axios.post(apiBaseUrl+'login', payload)
    .then(function (response) {
-     console.log(response);
+     console.log(response.data);
      if(response.data.status === 1){
-       console.log("Login successfull");
        var uploadScreen=[];
-       uploadScreen.push(<UploadScreen appContext={self.props.appContext}/>)
-       self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen,userid:response.data.id})
+       uploadScreen.push(<UploadScreen appContext={self.props.appContext} />)
+       self.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen,userid:response.data.id},)
+
      }
-     else if(response.data.status === 0){
-       console.log("Username password do not match");
-       alert(response.data.success)
+     else{
+       console.log("Username does not exists");
+       alert("Username does not exist");
      }
    })
    .catch(function (error) {

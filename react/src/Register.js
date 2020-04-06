@@ -14,7 +14,8 @@ const style = {
 class Register extends Component {
 
     handleClick(event){
-        var apiBaseUrl = "http://127.0.0.1:8000/api/";
+        //var apiBaseUrl = "http://127.0.0.1:8000/api/";
+        var apiBaseUrl = "https://django-react-activityapp.herokuapp.com/api/";
         console.log("values",this.state.first_name,this.state.last_name,this.state.email,this.state.password);
         //To be done:check for empty values before hitting submit
         var self = this;
@@ -31,9 +32,11 @@ class Register extends Component {
          console.log(response);
          if(response.data.status === 1){
           //  console.log("registration successfull");
+          console.log('abcd')
+          console.log(self)
           
            var loginscreen=[];
-           loginscreen.push(<Login parentContext={this}/>);
+           loginscreen.push(<Login parentContext={self.props.parentContext} appContext={self.props.parentContext.props.parentContext}/>);
            var loginmessage = "Not Registered yet.Go to registration";
            self.props.parentContext.setState({loginscreen:loginscreen,
            loginmessage:loginmessage,

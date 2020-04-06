@@ -1,2 +1,2 @@
 release: python manage.py migrate
-web: gunicorn throttlelab.wsgi --log-file -
+web: gunicorn trottlelabs.wsgi --log-file -

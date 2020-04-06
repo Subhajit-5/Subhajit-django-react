@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-///import injectTapEventPlugin from 'react-tap-event-plugin';
 import './App.css';
 import Loginscreen from './Loginscreen'
 
@@ -13,16 +12,19 @@ class App extends Component {
     }
   }
   componentWillMount(){
+    console.log(1)
     var loginPage =[];
+    console.log(this)
     loginPage.push(<Loginscreen parentContext={this}/>);
     this.setState({
                   loginPage:loginPage
                     })
   }
   render() {
+    console.log(2)
     return (
       <div className="App">
-        {this.state.loginPage}
+       {this.state.loginPage}
         {this.state.uploadScreen}
       </div>
     );

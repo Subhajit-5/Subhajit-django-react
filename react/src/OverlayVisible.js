@@ -12,7 +12,7 @@ class OverlayVisible extends React.Component {
        const { id,start_time, end_time } = value 
        return (
           <tr key={id}>
-             <td>{id}</td>
+             <td>{ }</td>
              <td>{start_time} : {end_time}</td>
           </tr>
        )

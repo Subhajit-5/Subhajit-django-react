@@ -12,19 +12,20 @@ class UploadScreen extends React.Component{
       }
     }
     componentDidMount(){
-        axios.get('http://127.0.0.1:8000/api/login')
+        var apiBaseUrl = "https://django-react-activityapp.herokuapp.com/api/login";
+        //var apiBaseUrl = "http://127.0.0.1:8000/api/login";
+        axios.get(apiBaseUrl)
         .then(res=>{
           this.setState({
             details:res.data
           });
-          console.log(res.data)
-          //console.log(this.props.appContext.state.userid)
         })
     }
     render(){
         return(
           <div>
             <CustomLayout>
+
               <Records
                 data={this.state.details.result}
                 id={this.props}
